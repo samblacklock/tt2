@@ -46,7 +46,12 @@ server.route({
     }).then((body) => {
       const $ = cheerio.load(body);
       const value = $('#balance strong').text();
-      reply(value);
+
+      fetch('https://maker.ifttt.com/trigger/permit_credit/with/key/ltP3LnYZKQn2OInyZjR1OqnCu6cSoGIYc_TFDz3TFXw', {
+        body: {
+          value1: value
+        }
+      }).then(() => reply(value));
     });
   }
 });
